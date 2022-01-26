@@ -4,7 +4,7 @@ from time import sleep
 from termcolor import cprint,colored
 
 def banner():
-    system("cls"),print("\n","\t"*3,end=""),cprint("===>  ","white",attrs=["bold"],end=""),cprint("Windows YouTube Downloader","magenta",attrs=["bold","underline"],end=""),cprint("   <===","white",attrs=["bold"],end=""),print("\t"*4,end=""),cprint("        ####  ","white",attrs=["bold"],end=""),cprint("By : Abd Almoen Arafa (0.1Arafa)","yellow",end=""),cprint("  ####","white",attrs=["bold"]),print("\t"*11,end=""),cprint("        ####  ","white",attrs=["bold"],end=""),cprint("Age : 15                         ","yellow",end=""),cprint(" ####","white",attrs=["bold"]),print("\n","\t"*2,end=""),cprint("[ ","grey",attrs=["bold"],end=""),cprint("1","green",end=""),cprint(" ]","grey",attrs=["bold"],end=""),cprint(" : ","yellow",attrs=["bold"],end=""),cprint("Full Video","blue",attrs=["bold"]),print("\n","\t"*2,end=""),cprint("[ ","grey",attrs=["bold"],end=""),cprint("2","green",end=""),cprint(" ]","grey",attrs=["bold"],end=""),cprint(" : ","yellow",attrs=["bold"],end=""),cprint("Only Audio","blue",attrs=["bold"]),print("\n","\t"*7,end=""),cprint("(  ","white",attrs=["bold"],end=""),cprint("Type N or No or EXIT or QUIT ","red",attrs=["bold"],end=""),cprint("to","red",attrs=["bold","underline"],end=""),cprint(" Exit The Terminal","red",attrs=["bold"],end=""),cprint(" | ","white",attrs=["bold"],end=""),cprint("CLEAR or CLS ","red",attrs=["bold"],end=""),cprint("to","red",attrs=["bold","underline"],end=""),cprint(" Clear The Terminal","red",attrs=["bold"],end=""),cprint("  )","white",attrs=["bold"])
+    system("cls"),print("\n","\t"*3,end=""),cprint("===>  ","white",attrs=["bold"],end=""),cprint("Windows YouTube Downloader","magenta",attrs=["bold","underline"],end=""),cprint("   <===","white",attrs=["bold"],end=""),print("\t"*4,end=""),cprint("        ####  ","white",attrs=["bold"],end=""),cprint("By : Abd Almoen Arafa (0.1Arafa)","yellow",end=""),cprint("  ####","white",attrs=["bold"]),print("\t"*11,end=""),cprint("        ####  ","white",attrs=["bold"],end=""),cprint("Age : 15                         ","yellow",end=""),cprint(" ####","white",attrs=["bold"]),print("\n","\t"*2,end=""),cprint("[ ","grey",attrs=["bold"],end=""),cprint("1","green",end=""),cprint(" ]","grey",attrs=["bold"],end=""),cprint(" : ","yellow",attrs=["bold"],end=""),cprint("Full Video","blue",attrs=["bold"]),print("\n","\t"*2,end=""),cprint("[ ","grey",attrs=["bold"],end=""),cprint("2","green",end=""),cprint(" ]","grey",attrs=["bold"],end=""),cprint(" : ","yellow",attrs=["bold"],end=""),cprint("Only Audio","blue",attrs=["bold"]),print("\n","\t"*6,end=""),cprint("(  ","white",attrs=["bold"],end=""),cprint("Type N or No or EXIT or QUIT ","red",attrs=["bold"],end=""),cprint("to","red",attrs=["bold","underline"],end=""),cprint(" Exit The Terminal","red",attrs=["bold"],end=""),cprint(" | ","white",attrs=["bold"],end=""),cprint("CLEAR or CLS ","red",attrs=["bold"],end=""),cprint("to","red",attrs=["bold","underline"],end=""),cprint(" Clear The Terminal","red",attrs=["bold"],end=""),cprint(" | ","white",attrs=["bold"],end=""),cprint("BACK ","red",attrs=["bold"],end=""),cprint("to","red",attrs=["bold","underline"],end=""),cprint(" back to hub","red",attrs=["bold"],end=""),cprint("  )","white",attrs=["bold"])
     ask=input(colored("\n[*] Enter your choice: ","grey",attrs=["bold"])).strip()
     if ask == "2":  audio()
     elif ask == "1":    Video()
@@ -24,6 +24,7 @@ def audio():
     if url.lower() == "n" or url.lower() == "no" or url.lower() == "exit" or url.lower() == "quit":  quit()
     elif not url:   audio()
     elif url.lower() == "cls" or url.lower() == "clear":   system("cls"),audio()
+    elif url.lower() == "back":   banner()
     try:    video=pafy.new(url)
     except: cprint("[-] Error,check your internet connection and you have to make sure that you're typing the write URL","red"),audio()
     if path.exists(video.title+".webm") or path.exists(video.title+".mp3") or path.exists(video.title+".m4a"):
@@ -43,6 +44,7 @@ def Video():
     if url.lower() == "n" or url.lower() == "no" or url.lower() == "exit" or url.lower() == "quit":  quit()
     elif not url:   Video()
     elif url.lower() == "cls" or url.lower() == "clear":   system("cls"),Video()
+    elif url.lower() == "back": banner()
     try:    video=pafy.new(url)
     except: cprint("[-] Error,check your internet connection and you have to make sure that you're typing the write URL","red"),Video()
     if path.exists(video.title+".webm") or path.exists(video.title+".mp4") or path.exists(video.title+".3gp"):  cprint("[++] This file is already installed","cyan"),Video()
