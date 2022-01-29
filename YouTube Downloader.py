@@ -2,9 +2,14 @@ from pafy import new
 from os import path,system
 from time import sleep
 from termcolor import cprint,colored
+import platform
+
+def the_cleaner():
+    if platform.system() == "Windows":  system("cls")
+    else:   system("clear")
 
 def main():
-    system("cls"),print("\n","\t"*3,end=""),cprint("===>  ","white",attrs=["bold"],end=""),cprint("Windows YouTube Downloader","magenta",attrs=["bold","underline"],end=""),cprint("   <===","white",attrs=["bold"],end=""),print("\t"*4,end=""),cprint("        ####  ","white",attrs=["bold"],end=""),cprint("By : Abd Almoen Arafa (0.1Arafa)","yellow",end=""),cprint("  ####","white",attrs=["bold"]),print("\t"*11,end=""),cprint("        ####  ","white",attrs=["bold"],end=""),cprint("Age : 15                         ","yellow",end=""),cprint(" ####","white",attrs=["bold"]),print("\n","\t"*2,end=""),cprint("[ ","grey",attrs=["bold"],end=""),cprint("1","green",end=""),cprint(" ]","grey",attrs=["bold"],end=""),cprint(" : ","yellow",attrs=["bold"],end=""),cprint("Full Video","blue",attrs=["bold"]),print("\n","\t"*2,end=""),cprint("[ ","grey",attrs=["bold"],end=""),cprint("2","green",end=""),cprint(" ]","grey",attrs=["bold"],end=""),cprint(" : ","yellow",attrs=["bold"],end=""),cprint("Only Audio","blue",attrs=["bold"]),print("\n","\t"*5,end=""),cprint("(  ","white",attrs=["bold"],end=""),cprint("Type N or No or EXIT or QUIT ","red",attrs=["bold"],end=""),cprint("to","red",attrs=["bold","underline"],end=""),cprint(" Exit The Terminal","red",attrs=["bold"],end=""),cprint(" | ","white",attrs=["bold"],end=""),cprint("CLEAR or CLS ","red",attrs=["bold"],end=""),cprint("to","red",attrs=["bold","underline"],end=""),cprint(" Clear The Terminal","red",attrs=["bold"],end=""),cprint(" | ","white",attrs=["bold"],end=""),cprint("MAIN ","red",attrs=["bold"],end=""),cprint("to","red",attrs=["bold","underline"],end=""),cprint(" Back To The Main Menu","red",attrs=["bold"],end=""),cprint("  )","white",attrs=["bold"])
+    the_cleaner(),print("\n","\t"*3,end=""),cprint("===>  ","white",attrs=["bold"],end=""),cprint("YouTube Downloader","magenta",attrs=["bold","underline","blink"],end=""),cprint("   <===","white",attrs=["bold"],end=""),print("\t"*4,end=""),cprint("        ####  ","white",attrs=["bold"],end=""),cprint("By : Abd Almoen Arafa (0.1Arafa)","yellow",end=""),cprint("  ####","white",attrs=["bold"]),print("\t"*11,end=""),cprint("####  ","white",attrs=["bold"],end=""),cprint("Age : 15                         ","yellow",end=""),cprint(" ####","white",attrs=["bold"]),print("\n","\t"*2,end=""),cprint("[ ","grey",attrs=["bold"],end=""),cprint("1","green",end=""),cprint(" ]","grey",attrs=["bold"],end=""),cprint(" : ","yellow",attrs=["bold"],end=""),cprint("Full Video","blue",attrs=["bold"]),print("\n","\t"*2,end=""),cprint("[ ","grey",attrs=["bold"],end=""),cprint("2","green",end=""),cprint(" ]","grey",attrs=["bold"],end=""),cprint(" : ","yellow",attrs=["bold"],end=""),cprint("Only Audio","blue",attrs=["bold"]),print("\n","\t"*5,end=""),cprint("(  ","white",attrs=["bold"],end=""),cprint("Type N or No or EXIT or QUIT ","red",attrs=["bold"],end=""),cprint("to","red",attrs=["bold","underline"],end=""),cprint(" Exit The Terminal","red",attrs=["bold"],end=""),cprint(" | ","white",attrs=["bold"],end=""),cprint("CLEAR or CLS ","red",attrs=["bold"],end=""),cprint("to","red",attrs=["bold","underline"],end=""),cprint(" Clear The Terminal","red",attrs=["bold"],end=""),cprint(" | ","white",attrs=["bold"],end=""),cprint("MAIN ","red",attrs=["bold"],end=""),cprint("to","red",attrs=["bold","underline"],end=""),cprint(" Back To The Main Menu","red",attrs=["bold"],end=""),cprint("  )","white",attrs=["bold"])
     ask=input(colored("\n[*] Enter your choice: ","grey",attrs=["bold"])).strip()
     if ask == "1":  video()
     elif ask == "2":    audio()
@@ -15,7 +20,7 @@ def audio():
     url=input(colored("\n[*] Enter The URL: ","grey",attrs=["bold"])).strip()
     if url.lower() == "n" or url.lower() == "no" or url.lower() == "exit" or url.lower() == "quit":  quit()
     elif not url:   audio()
-    elif url.lower() == "cls" or url.lower() == "clear":   system("cls"),audio()
+    elif url.lower() == "cls" or url.lower() == "clear":   the_cleaner(),audio()
     elif url.lower() == "main":   main()
     try:    video=new(url)
     except: cprint("[-] Error, Bad URL or check your Internet Connection","red"),audio()
@@ -29,7 +34,7 @@ def video():
     url=input(colored("\n[*] Enter The URL: ","grey",attrs=["bold"])).strip()
     if url.lower() == "n" or url.lower() == "no" or url.lower() == "exit" or url.lower() == "quit":  quit()
     elif not url:   video()
-    elif url.lower() == "cls" or url.lower() == "clear":   system("cls"),video()
+    elif url.lower() == "cls" or url.lower() == "clear":   the_cleaner(),video()
     elif url.lower() == "main": main()
     try:    Video=new(url)
     except: cprint("[-] Error, Bad URL or check your Internet Connection","red"),video()
