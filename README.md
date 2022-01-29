@@ -24,5 +24,11 @@ Windows:
 Linux:
     If you don't have any of these libraries, open your Terminal and write: pip3 install [The_Library]
     If you don't have youtube-dl, open your Terminal and write: sudo apt install youtube-dl
+    ----------------------------------
+    Common Issue:
+        If you have TypeError: dislike_count
+        Go to your Terminal and type this:  nano /usr/local/lib/python3.9/dist-packages/pafy/backend_youtube_dl.py
+        And go to this line : self._dislikes = self._ydl_info['dislike_count']
+        And comment it, it will be like this: #self._dislikes = self._ydl_info['dislike_count']
 
-----------------------------------
+-----------------------------------
