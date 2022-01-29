@@ -28,6 +28,7 @@ def audio():
     Title=video.title
     Sym=Title.maketrans(sym)
     if path.exists(Title.translate(Sym)+".mp3"):  cprint("[++] This file is already installed","cyan"),audio()
+    elif path.exists(Title.translate(Sym)+".webm.part"):  cprint("[++] This file is already installed, but it's not complete","cyan"),audio()
     print("\n",video,"\n"),system(f"youtube-dl --extract-audio --audio-format mp3 --output %(title)s.%(ext)s {url}"),cprint("[+] Done..","green",attrs=["bold"]),sleep(1),main()
 
 def video():
@@ -42,6 +43,7 @@ def video():
     Title=Video.title
     Sym=Title.maketrans(sym)
     if path.exists(Title.translate(Sym)+".webm") or path.exists(Title.translate(Sym)+".mp4") or path.exists(Title.translate(Sym)+".3gp"):  cprint("[++] This file is already installed","cyan"),video()
+    elif path.exists(Title.translate(Sym)+".mp4.part") or path.exists(Title.translate(Sym)+".3gp.part"):  cprint("[++] This file is already installed, but it's not complete","cyan"),video()
     print("\n",Video)
     streams=list(Video.streams)
     count=0
