@@ -1,4 +1,4 @@
-# 0.1ArafaWinYouTubeDownloader
+# 0.1ArafaYouTubeDownloader
 YouTube Video and MP3 Downloader, tested on Windows and Linux.
 
 ==========================
@@ -7,7 +7,7 @@ We need a pafy library to download a videos from YouTube.
 We need an os library to check if the file is already installed and execute the youtube-dl command and clear The Terminal.
 We need a time library to sleep one second when we finish.
 We need a termcolor library to make our Tool more beautiful.
-We need a platform library to know what is the operating system we're using and execute the write command for clear The Terminal.
+We need a platform library to know what is the operating system we're using and execute the right command for clear The Terminal.
 
 ==========================
 
