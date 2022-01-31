@@ -28,10 +28,11 @@ def audio():
     Title=video.title
     Sym=Title.maketrans(sym)
     if path.exists(Title.translate(Sym)+".mp3"):  cprint("[++] This file is already installed","cyan"),audio()
-    elif path.exists(Title.translate(Sym)+".webm.part"):  cprint("[++] This file is already installed, but it's not complete, The Download will resume","cyan")
+    elif path.exists(Title.translate(Sym)+".webm.part") or path.exists(Title.translate(Sym)+".m4a.part"):  cprint("[++] This file is already installed, but it's not complete, The Download will resume","cyan")
     elif path.exists(Title.translate(Sym)+".m4a") and platform.system() != "Windows":  cprint("[++] This file is already installed, but it's not complete, The Download will resume","cyan")
     if platform.system() == "Windows":  print("\n",video,"\n"),system(f"youtube-dl --extract-audio --audio-format mp3 --output %(title)s.%(ext)s {url}"),cprint("[+] Done..","green",attrs=["bold"]),sleep(1),main()
     else:   print("\n",video,"\n"),system(f"youtube-dl --extract-audio --audio-format mp3 --output '%(title)s.%(ext)s' {url}"),cprint("[+] Done..","green",attrs=["bold"]),sleep(1),main()  
+
 def video():
     url=input(colored("\n[*] Enter The URL: ","grey",attrs=["bold"])).strip()
     if url.lower() == "n" or url.lower() == "no" or url.lower() == "exit" or url.lower() == "quit":  quit()
