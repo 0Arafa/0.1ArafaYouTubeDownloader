@@ -24,14 +24,17 @@ def audio():
     elif url.lower() == "main":   main()
     try:    video=new(url)
     except: cprint("[-] Error, Bad URL or check your Internet Connection","red"),audio()
-    sym={"\\":"","/":"","?":"",":":"","*":"","<":"",">":"","|":"_",'"':''}
+    sym={"\\":"","/":"","?":"",":":" -","*":"","<":"",">":"","|":"_",'"':''}
     Title=video.title
     Sym=Title.maketrans(sym)
-    if path.exists(Title.translate(Sym)+".mp3"):  cprint("[++] This file is already installed","cyan"),audio()
-    elif path.exists(Title.translate(Sym)+".webm.part") or path.exists(Title.translate(Sym)+".m4a.part"):  cprint("[++] This file is already installed, but it's not complete, The Download will resume","cyan")
-    elif path.exists(Title.translate(Sym)+".m4a") and platform.system() != "Windows":  cprint("[++] This file is already installed, but it's not complete, The Download will resume","cyan")
-    if platform.system() == "Windows":  print("\n",video,"\n"),system(f"youtube-dl --extract-audio --audio-format mp3 --output %(title)s.%(ext)s {url}"),cprint("[+] Done..","green",attrs=["bold"]),sleep(1),main()
-    else:   print("\n",video,"\n"),system(f"youtube-dl --extract-audio --audio-format mp3 --output '%(title)s.%(ext)s' {url}"),cprint("[+] Done..","green",attrs=["bold"]),sleep(1),main()  
+    if platform.system() == "Windows" and system(f'IF EXIST "C:\\Users\\%username%\\Desktop\\{Title.translate(Sym)}.mp3" echo f|findstr "NONE"'):  cprint("[++] This file is already installed","cyan"),audio()
+    elif platform.system() != "Windows" and path.exists("/root/Desktop/"+Title.translate(Sym)+".mp3"):  cprint("[++] This file is already installed","cyan"),audio()
+    elif path.exists(Title.translate(Sym)+".webm.part") or path.exists(Title.translate(Sym)+".m4a.part"):  cprint("[++] This file is already installed, but it's not complete, The Download will resume","cyan",end="")
+    elif path.exists(Title.translate(Sym)+".m4a") and platform.system() != "Windows":  cprint("[++] This file is already installed, but it's not complete, The Download will resume","cyan",end="")
+    print("\n"),cprint(video,"white",attrs=["bold"])
+    if platform.system() == "Windows":  system(f'youtube-dl --extract-audio --audio-format mp3 --output %(title)s.%(ext)s {url}'),cprint("\n[+] Moving The File to Desktop...","green",attrs=["bold"]),system(f'move "{Title.translate(Sym)}.mp3" "C:\\Users\\%username%\\Desktop\\{Title.translate(Sym)}.mp3"|findstr "NONE"')
+    else:   system(f"youtube-dl --extract-audio --audio-format mp3 --output '%(title)s.%(ext)s' {url}"),cprint("\n[+] Moving The File to Desktop...","green",attrs=["bold"]),system(f'mv "{Title.translate(Sym)}.mp3" "/root/Desktop/{Title.translate(Sym)}.mp3"')
+    cprint("[+] Done..","green",attrs=["bold"]),sleep(1),main()
 
 def video():
     url=input(colored("\n[*] Enter The URL: ","grey",attrs=["bold"])).strip()
@@ -41,12 +44,13 @@ def video():
     elif url.lower() == "main": main()
     try:    Video=new(url)
     except: cprint("[-] Error, Bad URL or check your Internet Connection","red"),video()
-    sym={"\\":"","/":"","?":"",":":"","*":"","<":"",">":"","|":"_",'"':''}
+    sym={"\\":"","/":"","?":"",":":"_","*":"","<":"",">":"","|":"_",'"':''}
     Title=Video.title
     Sym=Title.maketrans(sym)
-    if path.exists(Title.translate(Sym)+".mp4") or path.exists(Title.translate(Sym)+".3gp"):  cprint("[++] This file is already installed","cyan"),video()
-    elif path.exists(Title.translate(Sym)+".mp4.part") or path.exists(Title.translate(Sym)+".3gp.part"):  cprint("[++] This file is already installed, but it's not complete, The Download will resume","cyan")
-    print("\n",Video)
+    if platform.system() == "Windows" and system(f'IF EXIST "C:\\Users\\%username%\\Desktop\\{Title.translate(Sym)}.mp4" echo f|findstr "NONE"') or system(f'IF EXIST "C:\\Users\\%username%\\Desktop\\{Title.translate(Sym)}.3gp" break'):  cprint("[++] This file is already installed","cyan"),video()
+    elif platform.system() != "Windows" and path.exists("/root/Desktop/"+Title.translate(Sym)+".mp4") or path.exists("/root/Desktop/"+Title.translate(Sym)+".3gp"):  cprint("[++] This file is already installed","cyan"),video()
+    elif path.exists(Title.translate(Sym)+".mp4.part") or path.exists(Title.translate(Sym)+".3gp.part"):  cprint("[++] This file is already installed, but it's not complete, The Download will resume if you choose the same quality","cyan",end="")
+    print("\n"),cprint(Video,"white",attrs=["bold"])
     streams=list(Video.streams)
     count=0
     for quality in streams:
@@ -60,6 +64,13 @@ def video():
     cprint(f"[+] The Resolution is: {streams[ask]}\n".replace("normal:",""),"green",attrs=["bold"])
     try:    connection=stream.download()
     except: cprint("[-] Connection Error, trying to connect...\n","red"),connection
+    cprint("\n[+] Moving The File to Desktop...","green",attrs=["bold"])
+    if platform.system() == "Windows":
+        try:    system(f'move "{Title.translate(Sym)}.mp4" "C:\\Users\\%username%\\Desktop\\{Title.translate(Sym)}.mp4"|findstr "NONE"')
+        except: system(f'move "{Title.translate(Sym)}.3gp" "C:\\Users\\%username%\\Desktop\\{Title.translate(Sym)}.3gp"|findstr "NONE"')
+    else:
+        try:    system(f'mv "{Title.translate(Sym)}.mp4" "/root/Desktop/{Title.translate(Sym)}.mp4"')
+        except: system(f'mv "{Title.translate(Sym)}.3gp" "/root/Desktop/{Title.translate(Sym)}.3gp"')
     cprint("[+] Done..","green",attrs=["bold"]),sleep(1),main()
 
 main()
