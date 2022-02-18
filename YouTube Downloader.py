@@ -28,12 +28,12 @@ def audio():
     Title=video.title
     Sym=Title.maketrans(sym)
     if platform.system() == "Windows" and system(f'IF EXIST "C:\\Users\\%username%\\Desktop\\{Title.translate(Sym)}.mp3" echo f|findstr "NONE"'):  cprint("[++] This file is already installed","cyan"),audio()
-    elif platform.system() != "Windows" and path.exists("/root/Desktop/"+Title.translate(Sym)+".mp3"):  cprint("[++] This file is already installed","cyan"),audio()
+    elif platform.system() != "Windows" and system(f'test -f "/`whoami`/Desktop/{Title.translate(Sym)}.mp3"'):  cprint("[++] This file is already installed","cyan"),audio()
     elif path.exists(Title.translate(Sym)+".webm.part") or path.exists(Title.translate(Sym)+".m4a.part"):  cprint("[++] This file is already installed, but it's not complete, The Download will resume","cyan",end="")
     elif path.exists(Title.translate(Sym)+".m4a") and platform.system() != "Windows":  cprint("[++] This file is already installed, but it's not complete, The Download will resume","cyan",end="")
     print("\n"),cprint(video,"white",attrs=["bold"])
     if platform.system() == "Windows":  system(f'youtube-dl --extract-audio --audio-format mp3 --output %(title)s.%(ext)s {url}'),cprint("\n[+] Moving The File to Desktop...","green",attrs=["bold"]),system(f'move "{Title.translate(Sym)}.mp3" "C:\\Users\\%username%\\Desktop\\{Title.translate(Sym)}.mp3"|findstr "NONE"')
-    else:   system(f"youtube-dl --extract-audio --audio-format mp3 --output '%(title)s.%(ext)s' {url}"),cprint("\n[+] Moving The File to Desktop...","green",attrs=["bold"]),system(f'mv "{Title.translate(Sym)}.mp3" "/root/Desktop/{Title.translate(Sym)}.mp3"')
+    else:   system(f"youtube-dl --extract-audio --audio-format mp3 --output '%(title)s.%(ext)s' {url}"),cprint("\n[+] Moving The File to Desktop...","green",attrs=["bold"]),system(f'mv "{Title.translate(Sym)}.mp3" "/`whoami`/Desktop/{Title.translate(Sym)}.mp3"')
     cprint("[+] Done..","green",attrs=["bold"]),sleep(1),main()
 
 def video():
@@ -48,7 +48,7 @@ def video():
     Title=Video.title
     Sym=Title.maketrans(sym)
     if platform.system() == "Windows" and system(f'IF EXIST "C:\\Users\\%username%\\Desktop\\{Title.translate(Sym)}.mp4" echo f|findstr "NONE"') or system(f'IF EXIST "C:\\Users\\%username%\\Desktop\\{Title.translate(Sym)}.3gp" break'):  cprint("[++] This file is already installed","cyan"),video()
-    elif platform.system() != "Windows" and path.exists("/root/Desktop/"+Title.translate(Sym)+".mp4") or path.exists("/root/Desktop/"+Title.translate(Sym)+".3gp"):  cprint("[++] This file is already installed","cyan"),video()
+    elif platform.system() != "Windows" and system('test -f "/`whoami`/Desktop/{Title.translate(Sym)}.mp4"') or system(f'test -f "/`whoami`/Desktop/{Title.translate(Sym)}.3gp"'):  cprint("[++] This file is already installed","cyan"),video()
     elif path.exists(Title.translate(Sym)+".mp4.part") or path.exists(Title.translate(Sym)+".3gp.part"):  cprint("[++] This file is already installed, but it's not complete, The Download will resume if you choose the same quality","cyan",end="")
     print("\n"),cprint(Video,"white",attrs=["bold"])
     streams=list(Video.streams)
@@ -69,8 +69,8 @@ def video():
         try:    system(f'move "{Title.translate(Sym)}.mp4" "C:\\Users\\%username%\\Desktop\\{Title.translate(Sym)}.mp4"|findstr "NONE"')
         except: system(f'move "{Title.translate(Sym)}.3gp" "C:\\Users\\%username%\\Desktop\\{Title.translate(Sym)}.3gp"|findstr "NONE"')
     else:
-        try:    system(f'mv "{Title.translate(Sym)}.mp4" "/root/Desktop/{Title.translate(Sym)}.mp4"')
-        except: system(f'mv "{Title.translate(Sym)}.3gp" "/root/Desktop/{Title.translate(Sym)}.3gp"')
+        try:    system(f'mv "{Title.translate(Sym)}.mp4" "/`whoami`/Desktop/{Title.translate(Sym)}.mp4"')
+        except: system(f'mv "{Title.translate(Sym)}.3gp" "/`whoami`/Desktop/{Title.translate(Sym)}.3gp"')
     cprint("[+] Done..","green",attrs=["bold"]),sleep(1),main()
 
 main()
