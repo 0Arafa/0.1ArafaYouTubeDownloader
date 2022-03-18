@@ -1,7 +1,7 @@
 from pafy import new
 from os import path,system
 from time import sleep
-from termcolor import cprint,colored
+from termcolor import cprint
 import platform
 
 def the_cleaner():
