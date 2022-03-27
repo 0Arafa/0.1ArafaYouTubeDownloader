@@ -26,7 +26,7 @@ def audio():
     elif url.lower() == "main": main()
     try:    video=new(url)
     except: cprint("[-] Error, Invalid URL or check your Internet Connection.","red"),audio()
-    sym={"\\":"","/":"_","?":"",":":" -","*":"","<":"",">":"","|":"_",'"':''}
+    sym={"\\":"","/":"_","?":"",":":" -","*":"","<":"",">":"","|":"_",'"':"'"}
     Title=video.title
     Sym=Title.maketrans(sym)
     if platform.system() == "Windows" and system(f'IF EXIST "C:\\Users\\%username%\\Desktop\\{Title.translate(Sym)}.mp3" echo f|findstr "NONE"'):   cprint("[++] This file is already installed.","cyan"),audio()
@@ -47,7 +47,7 @@ def video():
     elif url.lower() == "main": main()
     try:    Video=new(url)
     except: cprint("[-] Error, Invalid URL or check your Internet Connection.","red"),video()
-    sym={"\\":"","/":"_","?":"",":":"_","*":"","<":"",">":"","|":"_",'"':''}
+    sym={"\\":"","/":"_","?":"",":":"_","*":"","<":"",">":"","|":"_",'"':"'"}
     Title=Video.title
     Sym=Title.maketrans(sym)
     if platform.system() == "Windows":
